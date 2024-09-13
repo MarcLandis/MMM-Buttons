@@ -7,6 +7,7 @@
 
 const Gpio = require('onoff').Gpio;
 const NodeHelper = require("node_helper");
+const fs = require('fs');
 
 module.exports = NodeHelper.create({
     // Subclass start method.
@@ -68,10 +69,23 @@ module.exports = NodeHelper.create({
 
     intializeButton: function(index) {
         const self = this;
+        var pinOffset = 0;
+
+        var model;
+        try {
+            model = fs.readFileSync('/proc/device-tree/model', { encoding: 'utf8' });
+        } catch (e) {  }
+
+        console.log(self.name + ": RPi model " + model);
+
+        if (model.startsWith("Raspberry Pi 5")) {
+            console.log(self.name + ": RPi5 detected");
+            pinOffset = 571; // RPi5 has diffent pin numbering
+        }
 
         var options = { persistentWatch: true , activeLow: !!self.buttons[index].activeLow};
 
-        var pir = new Gpio(self.buttons[index].pin, 'in', 'both', options);
+        var pir = new Gpio(parseInt(self.buttons[index].pin) + pinOffset, 'in', 'both', options);
         pir.watch(this.watchHandler(index));
     },
 

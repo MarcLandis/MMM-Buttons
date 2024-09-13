@@ -9,11 +9,33 @@
 
 Module.register("MMM-Buttons", {
 
-    requiresVersion: "2.1.0",
-
     // Default module config.
     defaults: {
-        buttons: [],
+        buttons: [
+            {
+                pin: 24,
+                activeLow: false,
+                name: "Button",
+                shortPress: [
+                    {
+                        title: "",
+                        message: "",
+                        imageFA: "",
+                        notification: "",
+                        payload: ""
+                    }
+                ],
+                longPress: [
+                    {
+                        title: "",
+                        message: "",
+                        imageFA: "",
+                        notification: "",
+                        payload: ""
+                    }
+                ],
+            }
+        ],
         minShortPressTime: 0,
         maxShortPressTime: 500,
         minLongPressTime: 3000,
@@ -84,8 +106,10 @@ Module.register("MMM-Buttons", {
         }
     },
 
-    sendAction: function(description) {
-        this.sendNotification(description.notification, description.payload);
+    sendAction: function (description) {
+        for (var i = 0; i < description.length; i++) {
+            this.sendNotification(description[i].notification, description[i].payload);
+        }
     },
 
     buttonDown: function(index) {

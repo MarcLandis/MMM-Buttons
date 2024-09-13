@@ -29,32 +29,40 @@ One switches on the display on a short press, and switches it off on a long pres
 The other does not do anything on a short press, but shuts down the system after keeping it pressed for 3 seconds with an explanatory user alert.
 ```
 {
-    module: 'MMM-Buttons',
+    module: "MMM-Buttons",
     config: {
         buttons: [
             {
                 pin: 25,
                 name: "monitor_control",
-                longPress: {
-                    notification: "REMOTE_ACTION",
-                    payload: {action: "MONITOROFF"}
-                },
-                shortPress: {
-                    notification: "REMOTE_ACTION",
-                    payload: {action: "MONITORON"}
-                }
+                longPress: [
+                    {
+                        notification: "REMOTE_ACTION",
+                        payload: {action: "MONITOROFF"}
+                    }
+                ],
+                shortPress: [
+                    {
+                        notification: "REMOTE_ACTION",
+                        payload: {action: "MONITORON"}
+                    }
+                ]
             },
             {
                 pin: 24,
                 name: "power",
-                longPress: {
-                    title: "Power off",
-                    message: "Keep pressed for 3 seconds to shut down",
-                    imageFA: "power-off",
-                    notification: "REMOTE_ACTION",
-                    payload: {action: "SHUTDOWN"}
-                },
-                shortPress: undefined
+                longPress: [
+                    {
+                        title: "Power off",
+                        message: "Keep pressed for 3 seconds to shut down",
+                        imageFA: "power-off",
+                        notification: "REMOTE_ACTION",
+                        payload: {action: "SHUTDOWN"}
+                    }
+                ],
+                shortPress: [
+                    undefined
+                ]
             }
         ]
     }
@@ -85,7 +93,7 @@ Each button configuration is an object with the following properties:
 
 ### Notification Configuration
 
-Each notification configuration is an object with the following properties:
+Each notification configuration is an array of objects with the following properties:
 
 | Property      | Description   |
 | ------------- | ------------- |
@@ -98,6 +106,7 @@ Each notification configuration is an object with the following properties:
 ### The MIT License (MIT)
 
 Copyright © 2016 Joseph Bethge
+Copyright © 2024 MarcLandis
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
