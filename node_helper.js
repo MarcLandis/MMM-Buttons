@@ -1,34 +1,35 @@
-/* Magic Mirror
+/* MagicMirror²
  * Node Helper: Buttons
  *
  * By Joseph Bethge
  * MIT Licensed.
  */
 
-const Gpio = require('onoff').Gpio;
+const Gpio = require("onoff").Gpio;
+const Log = require("logger");
 const NodeHelper = require("node_helper");
-const fs = require('fs');
+const fs = require("fs");
 
 module.exports = NodeHelper.create({
     // Subclass start method.
-    start: function() {
+    start () {
         var self = this;
         
-        console.log("Starting node helper for: " + self.name);
+        Log.log("Starting node helper for: " + self.name);
 
         this.loaded = false;
     },
 
     // Subclass socketNotificationReceived received.
-    socketNotificationReceived: function(notification, payload) {
-        if (notification === 'BUTTON_CONFIG') {     
+    socketNotificationReceived (notification, payload) {
+        if (notification === "BUTTON_CONFIG") {     
             this.config = payload.config;
 
             this.intializeButtons();
         };
     },
 
-    watchHandler: function(index) {
+    watchHandler (index) {
         var self = this;
 
         return function (err, value) {
@@ -67,29 +68,29 @@ module.exports = NodeHelper.create({
         }
     },
 
-    intializeButton: function(index) {
+    intializeButton (index) {
         const self = this;
         var pinOffset = 0;
 
         var model;
         try {
-            model = fs.readFileSync('/proc/device-tree/model', { encoding: 'utf8' });
+            model = fs.readFileSync("/proc/device-tree/model", { encoding: "utf8" });
         } catch (e) {  }
 
-        console.log(self.name + ": RPi model " + model);
+        Log.log(self.name + ": RPi model " + model);
 
         if (model.startsWith("Raspberry Pi 5")) {
-            console.log(self.name + ": RPi5 detected");
+            Log.log(self.name + ": RPi5 detected");
             pinOffset = 571; // RPi5 has diffent pin numbering
         }
 
         var options = { persistentWatch: true , activeLow: !!self.buttons[index].activeLow};
 
-        var pir = new Gpio(parseInt(self.buttons[index].pin) + pinOffset, 'in', 'both', options);
+        var pir = new Gpio(parseInt(self.buttons[index].pin) + pinOffset, "in", "both", options);
         pir.watch(this.watchHandler(index));
     },
 
-    intializeButtons: function() {
+    intializeButtons () {
         const self = this;
 
         if (self.loaded) {
@@ -99,7 +100,7 @@ module.exports = NodeHelper.create({
         self.buttons = self.config.buttons;
 
         for (var i = 0; i < self.buttons.length; i++) {
-            console.log("Initialize button " + self.buttons[i].name + " on PIN " + self.buttons[i].pin);
+            Log.log("Initialize button " + self.buttons[i].name + " on PIN " + self.buttons[i].pin);
             self.buttons[i].pressed = undefined;
             self.intializeButton(i);
         }
