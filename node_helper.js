@@ -6,6 +6,7 @@
  */
 
 const Gpio = require('onoff').Gpio;
+const Log = require("logger");
 const NodeHelper = require("node_helper");
 const fs = require('fs');
 
@@ -14,7 +15,7 @@ module.exports = NodeHelper.create({
     start: function() {
         var self = this;
         
-        console.log("Starting node helper for: " + self.name);
+        Log.log("Starting node helper for: " + self.name);
 
         this.loaded = false;
     },
@@ -76,10 +77,10 @@ module.exports = NodeHelper.create({
             model = fs.readFileSync('/proc/device-tree/model', { encoding: 'utf8' });
         } catch (e) {  }
 
-        console.log(self.name + ": RPi model " + model);
+        Log.log(self.name + ": RPi model " + model);
 
         if (model.startsWith("Raspberry Pi 5")) {
-            console.log(self.name + ": RPi5 detected");
+            Log.log(self.name + ": RPi5 detected");
             pinOffset = 571; // RPi5 has diffent pin numbering
         }
 
@@ -99,7 +100,7 @@ module.exports = NodeHelper.create({
         self.buttons = self.config.buttons;
 
         for (var i = 0; i < self.buttons.length; i++) {
-            console.log("Initialize button " + self.buttons[i].name + " on PIN " + self.buttons[i].pin);
+            Log.log("Initialize button " + self.buttons[i].name + " on PIN " + self.buttons[i].pin);
             self.buttons[i].pressed = undefined;
             self.intializeButton(i);
         }
