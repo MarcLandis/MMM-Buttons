@@ -17,6 +17,7 @@ For example this can be used to send notifications to the following modules:
 ## Installation
 
 Clone this repository in your `modules` folder, and install dependencies:
+
 ```bash
 cd ~/MagicMirror/modules # adapt directory if you are using a different one
 git clone https://github.com/MarcLandis/MMM-Buttons
@@ -29,9 +30,11 @@ npm install # this can take a while
 Add the module to your modules array in your `config.js`.
 
 Below is a simple example (needs [Remote Control](https://forum.magicmirror.builders/topic/735/remote-control-shutdown-configure-and-update-your-magicmirror) installed), with two buttons conneted, on pins 24 and 25.
+
 One switches on the display on a short press, and switches it off on a long press.
 The other does not do anything on a short press, but shuts down the system after keeping it pressed for 3 seconds with an explanatory user alert.
-```
+
+```js
 {
     module: "MMM-Buttons",
     config: {
@@ -72,6 +75,7 @@ The other does not do anything on a short press, but shuts down the system after
     }
 },
 ```
+
 ### Module Configuration
 
 Here is full documentation of options for the modules configuration:
