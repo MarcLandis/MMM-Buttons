@@ -1,6 +1,6 @@
-# Magic Mirror Module: Buttons
+# MMM-Buttons
 
-This a module for [Magic Mirror²](https://github.com/MichMich/MagicMirror) to act based on button presses via GPIO.
+This a module for [MagicMirror²](https://github.com/MichMich/MagicMirror) to act based on button presses via GPIO.
 
 ![symbolization](symbolization.png)
 
