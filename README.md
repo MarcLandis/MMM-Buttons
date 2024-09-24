@@ -1,6 +1,6 @@
 # MMM-Buttons
 
-This a module for [MagicMirror²](https://github.com/MichMich/MagicMirror) to act based on button presses via GPIO.
+This a module for [MagicMirror²](https://github.com/MagicMirrorOrg/MagicMirror) to act based on button presses via GPIO.
 
 ![symbolization](symbolization.png)
 
@@ -103,7 +103,7 @@ Each notification configuration is an array of objects with the following proper
 | ------------- | ------------- |
 | `notification` | Notification name. |
 | `payload` | Notification payload. Can be anything, for example a `string` or an `object`. |
-| `title`, `message`, and `imageFA` | *Optional (only for long press notifications):* If you want to display a message before executing set its options here. See [Alert documentation](https://github.com/MichMich/MagicMirror/tree/master/modules/default/alert#alert-params) for their meaning. |
+| `title`, `message`, and `imageFA` | *Optional (only for long press notifications):* If you want to display a message before executing set its options here. See [Alert documentation](https://github.com/MagicMirrorOrg/MagicMirror/tree/master/modules/default/alert#alert-params) for their meaning. |
 
 ## License
 
