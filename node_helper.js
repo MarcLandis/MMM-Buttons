@@ -5,14 +5,14 @@
  * MIT Licensed.
  */
 
-const Gpio = require('onoff').Gpio;
+const Gpio = require("onoff").Gpio;
 const Log = require("logger");
 const NodeHelper = require("node_helper");
-const fs = require('fs');
+const fs = require("fs");
 
 module.exports = NodeHelper.create({
     // Subclass start method.
-    start: function() {
+    start () {
         var self = this;
         
         Log.log("Starting node helper for: " + self.name);
@@ -21,15 +21,15 @@ module.exports = NodeHelper.create({
     },
 
     // Subclass socketNotificationReceived received.
-    socketNotificationReceived: function(notification, payload) {
-        if (notification === 'BUTTON_CONFIG') {     
+    socketNotificationReceived (notification, payload) {
+        if (notification === "BUTTON_CONFIG") {     
             this.config = payload.config;
 
             this.intializeButtons();
         };
     },
 
-    watchHandler: function(index) {
+    watchHandler (index) {
         var self = this;
 
         return function (err, value) {
@@ -68,13 +68,13 @@ module.exports = NodeHelper.create({
         }
     },
 
-    intializeButton: function(index) {
+    intializeButton (index) {
         const self = this;
         var pinOffset = 0;
 
         var model;
         try {
-            model = fs.readFileSync('/proc/device-tree/model', { encoding: 'utf8' });
+            model = fs.readFileSync("/proc/device-tree/model", { encoding: "utf8" });
         } catch (e) {  }
 
         Log.log(self.name + ": RPi model " + model);
@@ -86,11 +86,11 @@ module.exports = NodeHelper.create({
 
         var options = { persistentWatch: true , activeLow: !!self.buttons[index].activeLow};
 
-        var pir = new Gpio(parseInt(self.buttons[index].pin) + pinOffset, 'in', 'both', options);
+        var pir = new Gpio(parseInt(self.buttons[index].pin) + pinOffset, "in", "both", options);
         pir.watch(this.watchHandler(index));
     },
 
-    intializeButtons: function() {
+    intializeButtons () {
         const self = this;
 
         if (self.loaded) {

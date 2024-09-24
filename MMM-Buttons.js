@@ -43,7 +43,7 @@ Module.register("MMM-Buttons", {
     },
 
     // Define start sequence.
-    start: function() {
+    start () {
         Log.info("Starting module: " + this.name);
 
         this.sendConfig();
@@ -58,22 +58,22 @@ Module.register("MMM-Buttons", {
     },
 
     // Override dom generator.
-    getDom: function() {
+    getDom () {
         var wrapper = document.createElement("div");
 
         return wrapper;
     },
 
     /* sendConfig()
-     * intialize backend
-     */
-    sendConfig: function() {
+   * intialize backend
+   */
+    sendConfig () {
         this.sendSocketNotification("BUTTON_CONFIG", {
             config: this.config
         });
     },
 
-    buttonUp: function(index, duration) {
+    buttonUp (index, duration) {
         if (this.alerts[index]) {
             // alert already shown, clear interval to update it and hide it
             if (this.intervals[index] !== undefined) {
@@ -106,13 +106,13 @@ Module.register("MMM-Buttons", {
         }
     },
 
-    sendAction: function (description) {
+    sendAction (description) {
         for (var i = 0; i < description.length; i++) {
             this.sendNotification(description[i].notification, description[i].payload);
         }
     },
 
-    buttonDown: function(index) {
+    buttonDown (index) {
         var self = this;
 
         if (self.config.buttons[index].longPress && self.config.buttons[index].longPress.title)
@@ -123,8 +123,8 @@ Module.register("MMM-Buttons", {
         }
     },
 
-    showAlert: function (index) {
-        // display the message
+    showAlert (index) {
+    // display the message
         this.sendNotification("SHOW_ALERT", {
             title: this.config.buttons[index].longPress.title,
             message: this.config.buttons[index].longPress.message,
@@ -132,13 +132,13 @@ Module.register("MMM-Buttons", {
         });
     },
 
-    startAlert: function(index) {
+    startAlert (index) {
         this.alerts[index] = true;
         this.showAlert(index);
     },
 
     // Override socket notification handler.
-    socketNotificationReceived: function(notification, payload) {
+    socketNotificationReceived (notification, payload) {
         if (notification === "BUTTON_UP")
         {
             this.buttonUp(payload.index, payload.duration);
