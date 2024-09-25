@@ -34,7 +34,7 @@ module.exports = NodeHelper.create({
 
         return function (err, value) {
             if (value == 1) {
-                var start = new Date().getTime();
+                var start = new Date(Date.now()).getTime();
                 if (self.buttons[index].downBounceTimeoutEnd > start) {
                     // We're bouncing!
                     return;
@@ -49,7 +49,7 @@ module.exports = NodeHelper.create({
             }
             if (value == 0 && self.buttons[index].pressed !== undefined) {
                 var start = self.buttons[index].pressed;
-                var end = new Date().getTime();
+                var end = new Date(Date.now()).getTime();
                 if (self.buttons[index].upBounceTimeoutEnd > end) {
                     // We're bouncing!
                     return;
