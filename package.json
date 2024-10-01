@@ -23,7 +23,7 @@
     "postinstall": "node_modules/.bin/electron-rebuild -e ../../node_modules/electron"
   },
   "dependencies": {
-    "@electron/rebuild": "^3.6.0",
+    "@electron/rebuild": "^3.6.1",
     "nan": "^2.20.0",
     "onoff": "^6.0.3"
   },
