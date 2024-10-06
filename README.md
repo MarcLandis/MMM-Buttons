@@ -1,6 +1,6 @@
 # MMM-Buttons
 
-This a module for [MagicMirror²](https://github.com/MagicMirrorOrg/MagicMirror) to act based on button presses via GPIO.
+This is a module for [MagicMirror²](https://github.com/MagicMirrorOrg/MagicMirror) to act based on button presses via GPIO.
 
 ![symbolization](symbolization.png)
 
@@ -16,7 +16,7 @@ For example this can be used to send notifications to the following modules:
 
 ## Installation
 
-Clone this repository in your `modules` folder, and install dependencies:
+Clone this repository into your `modules` directory and install the dependencies:
 
 ```bash
 cd ~/MagicMirror/modules # adapt directory if you are using a different one
