@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@electron/rebuild": "^3.6.2",
-    "nan": "^2.20.0",
+    "nan": "^2.22.0",
     "onoff": "^6.0.3"
   },
   "resolutions": {
