@@ -83,6 +83,9 @@ module.exports = NodeHelper.create({
             Log.log(self.name + ": RPi5 detected");
             pinOffset = 571; // RPi5 has diffent pin numbering
         }
+        else {
+            pinOffset = 512; //offset for other raspis
+        }
 
         var options = { persistentWatch: true , activeLow: !!self.buttons[index].activeLow};
 
